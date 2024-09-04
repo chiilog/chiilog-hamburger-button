@@ -11,7 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { ComboboxControl, PanelBody, TextControl } from '@wordpress/components';
+import { useEntityRecords } from '@wordpress/core-data';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,13 +31,71 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function Edit( { attributes, setAttributes } ) {
+	const { label, menuSlug } = attributes;
+
+	/**
+	 * 全てのテンプレートパートをここで取得
+ 	 */
+	const { hasResolved, records } = useEntityRecords(
+		'postType',
+		'wp_template_part',
+		{ per_page: -1 }
+	);
+
+	/**
+	 * テンプレートパートの名前とスラッグを格納する配列。
+	 * テンプレートパート`menu`に入るものしか入れない。
+	 */
+	let menuOptions = [];
+
+	/**
+	 * 取得したテンプレートパートから`menu`に登録されているもののみを抽出
+	 * `menu`は`chiilog-overlay-menu.php`内で定義している
+	 */
+	if ( hasResolved ) {
+		menuOptions = records
+			.filter( ( item ) => item.area === 'menu' )
+			.map( ( item )  => ( {
+				label: item.title.rendered, // テンプレートパートの名前
+				value: item.slug, // テンプレートパートのスラッグ
+			} ) );
+	}
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Overlay Menu – hello from the editor!',
-				'chiilog-overlay-menu'
-			) }
-		</p>
+		<>
+			<InspectorControls>
+				<PanelBody
+					title={ __( '設定', 'chiilog-overlay-menu' ) }
+					initialOpen={ true }
+				>
+					<TextControl
+						label={ __( 'ラベル', 'chiilog-overlay-menu' ) }
+						type="text"
+						value={ label }
+						onChange={ ( value ) =>
+							setAttributes( { label: value } )
+						}
+						autoComplete="off"
+					/>
+					<ComboboxControl
+						label={ __( 'テンプレートパート', 'chiilog-overlay-menu' ) }
+						value={ menuSlug }
+						options={ menuOptions }
+						onChange={ ( slugValue ) =>
+							setAttributes( { menuSlug: slugValue } )
+						}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<div {...useBlockProps()}>
+				<button>
+					{__(
+						'ボタン',
+						'chiilog-overlay-menu'
+					)}
+				</button>
+			</div>
+		</>
 	);
 }

@@ -11,6 +11,14 @@
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"label": {
+			"type": "string"
+		},
+		"menuSlug": {
+			"type": "string"
+		}
+	},
 	"textdomain": "chiilog-overlay-menu",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
