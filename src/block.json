@@ -12,9 +12,6 @@
 		"html": false
 	},
 	"attributes": {
-		"label": {
-			"type": "string"
-		},
 		"menuSlug": {
 			"type": "string"
 		}

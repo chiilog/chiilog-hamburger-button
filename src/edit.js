@@ -32,7 +32,7 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { label, menuSlug } = attributes;
+	const { menuSlug } = attributes;
 
 	/**
 	 * 全てのテンプレートパートをここで取得
@@ -57,7 +57,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		menuOptions = records
 			.filter( ( item ) => item.area === 'menu' )
 			.map( ( item )  => ( {
-				label: item.title.rendered, // テンプレートパートの名前
 				value: item.slug, // テンプレートパートのスラッグ
 			} ) );
 	}
@@ -69,15 +68,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( '設定', 'chiilog-overlay-menu' ) }
 					initialOpen={ true }
 				>
-					<TextControl
-						label={ __( 'ラベル', 'chiilog-overlay-menu' ) }
-						type="text"
-						value={ label }
-						onChange={ ( value ) =>
-							setAttributes( { label: value } )
-						}
-						autoComplete="off"
-					/>
 					<ComboboxControl
 						label={ __( 'テンプレートパート', 'chiilog-overlay-menu' ) }
 						value={ menuSlug }
