@@ -18,7 +18,7 @@ if ( ! $menu_slug ) {
 	<button>Button</button>
 	<div class="wp-block-chiilog-chiilog-overlay-menu__menu-container">
 		<button
-			aria-label="<?php echo __( 'Close menu', 'mega-menu' ); ?>"
+			aria-label="<?php echo __( 'Close menu', 'chiilog-overlay-menu' ); ?>"
 			class="menu-container__close-button"
 			type="button"
 		>
