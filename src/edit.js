@@ -57,6 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		menuOptions = records
 			.filter( ( item ) => item.area === 'menu' )
 			.map( ( item )  => ( {
+				label: item.title.rendered, // テンプレートパートの名前
 				value: item.slug, // テンプレートパートのスラッグ
 			} ) );
 	}
