@@ -1,0 +1,21 @@
+.site-header {
+	position: relative;
+}
+
+.wp-block-chiilog-chiilog-overlay-menu__menu-container {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #fff;
+	padding: 20px;
+	z-index: 10;
+}
+
+.wp-block-chiilog-chiilog-overlay-menu__close-button {
+	display: block;
+	margin-left: auto;
+	background: none;
+	border: none;
+	padding: 0;
+}
