@@ -22,16 +22,9 @@ if ( ! $menu_slug ) {
 	<button
 		data-wp-on--click="actions.toggleOverlay"
 		data-wp-bind--aria-expanded="context.isOpen"
-	>Button</button>
+		class="wp-block-chiilog-chiilog-overlay-menu__menu-button"
+	><?php echo $close_icon; ?></button>
 	<div class="wp-block-chiilog-chiilog-overlay-menu__menu-container" data-wp-bind--hidden="!context.isOpen">
-		<button
-			aria-label="<?php echo __( 'Close menu', 'chiilog-overlay-menu' ); ?>"
-			class="wp-block-chiilog-chiilog-overlay-menu__close-button"
-			type="button"
-			data-wp-on--click="actions.closeOverlay"
-		>
-			<?php echo $close_icon; ?>
-		</button>
 		<?php echo block_template_part( $menu_slug ); ?>
 	</div>
 </div>
