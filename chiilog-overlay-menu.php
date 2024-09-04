@@ -25,7 +25,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function chiilog_chiilog_overlay_menu_block_init() {
+function chiilog_chiilog_overlay_menu_block_init(): void {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'chiilog_chiilog_overlay_menu_block_init' );
+
+/**
+ * Adds a custom template part area for mega menus to the list of template part areas.
+ *
+ * @param array $areas Existing array of template part areas.
+ * @return array Modified array of template part areas including the new "Menu" area.
+ */
+function chiilog_chiilog_overlay_menu_block_register_template_part_areas( array $areas ): array {
+	$areas[] = array(
+		'area'        => 'menu',
+		'area_tag'    => 'div',
+		'description' => __( 'Menu templates are used to create sections of a mega menu.', 'chiilog-overlay-menu' ),
+		'icon'        => '',
+		'label'       => __( 'Menu', 'chiilog-overlay-menu' ),
+	);
+
+	return $areas;
+}
+add_filter( 'default_wp_template_part_areas', 'chiilog_chiilog_overlay_menu_block_register_template_part_areas' );
