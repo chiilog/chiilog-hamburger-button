@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Retrieves the translation of text.
  *
@@ -12,8 +14,10 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { ComboboxControl, PanelBody, TextControl } from '@wordpress/components';
+import { ComboboxControl, Notice, PanelBody } from '@wordpress/components';
 import { useEntityRecords } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -35,6 +39,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	const { menuSlug } = attributes;
 
 	/**
+	 * テンプレートパートのURLを取得
+	 */
+	const siteUrl = useSelect( ( select ) => select( 'core' ).getSite()?.url , [] );
+	const menuTemplateUrl = siteUrl ? `${siteUrl}/wp-admin/site-editor.php?categoryId=menu&postType=wp_template_part` : '';
+
+	/**
 	 * 全てのテンプレートパートをここで取得
  	 */
 	const { hasResolved, records } = useEntityRecords(
@@ -42,7 +52,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		'wp_template_part',
 		{ per_page: -1 }
 	);
-
 	/**
 	 * テンプレートパートの名前とスラッグを格納する配列。
 	 * テンプレートパート`menu`に入るものしか入れない。
@@ -62,6 +71,40 @@ export default function Edit( { attributes, setAttributes } ) {
 			} ) );
 	}
 
+	/**
+	 * メニューがあるかどうか
+	 *
+	 * @type {boolean}
+	 */
+	const hasMenus = menuOptions.length > 0;
+
+	/**
+	 * メニューが作成されてない場合のNotice
+	 * NOTE: Notice https://developer.wordpress.org/block-editor/reference-guides/components/notice/
+	 * NOTE: createInterpolateElement https://developer.wordpress.org/block-editor/reference-guides/packages/packages-element/#createinterpolateelement
+	 *
+	 * @type {JSX.Element}
+	 */
+	const noMenusNotice = (
+		<Notice status="warning" isDismissible={ false }>
+			{ createInterpolateElement(
+				__(
+					'メニューのテンプレートパートがありません。<a>サイトエディター</a>から作成してください。',
+					'chiilog-overlay-menu'
+				),
+				{
+					a: (
+						<a // eslint-disable-line
+							href={ menuTemplateUrl }
+							target="_blank"
+							rel="noreferrer"
+						/>
+					),
+				}
+			) }
+		</Notice>
+	);
+
 	return (
 		<>
 			<InspectorControls>
@@ -77,6 +120,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							setAttributes( { menuSlug: slugValue } )
 						}
 					/>
+					{ ! hasMenus && noMenusNotice }
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
