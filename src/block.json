@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "chiilog/chiilog-overlay-menu",
+	"name": "chiilog-block/overlay-menu",
 	"version": "0.1.0",
 	"title": "Overlay Menu",
 	"category": "theme",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"icon": "menu",
+	"description": "Overlay menu block for block editor.",
 	"example": {},
 	"supports": {
 		"html": false,
@@ -20,7 +20,7 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "chiilog-overlay-menu",
+	"textdomain": "chiilog-block-overlay-menu",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

@@ -1,6 +1,6 @@
 import { store, getContext } from '@wordpress/interactivity';
 
-const { actions } = store( 'chiilog/chiilog-overlay-menu', {
+const { actions } = store( 'chiilog-block/overlay-menu', {
 	actions: {
 		toggleOverlay() {
 			const context = getContext();
@@ -15,6 +15,6 @@ const { actions } = store( 'chiilog/chiilog-overlay-menu', {
 			const context = getContext();
 
 			context.isOpen = false;
-		}
-	}
+		},
+	},
 } );
