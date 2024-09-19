@@ -23,7 +23,11 @@ if ( ! $menu_slug ) {
 		data-wp-on--click="actions.toggleOverlay"
 		data-wp-bind--aria-expanded="context.isOpen"
 		class="wp-block-chiilog-block-overlay-menu__menu-button"
-	><?php echo $close_icon; ?></button>
+	>
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
 	<div class="wp-block-chiilog-block-overlay-menu__menu-container" data-wp-bind--hidden="!context.isOpen">
 		<?php echo block_template_part( $menu_slug ); ?>
 	</div>

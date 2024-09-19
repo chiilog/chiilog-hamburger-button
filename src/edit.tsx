@@ -12,8 +12,6 @@ import type { BlockEditProps } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import './editor.scss';
-
 type BlockAttributes = {
 	label: string;
 	menuSlug: string | null;
@@ -118,8 +116,10 @@ export default function Edit( {
 				</PanelBody>
 			</InspectorControls>
 			<div { ...useBlockProps() }>
-				<button>
-					{ __( 'Button', 'chiilog-block-overlay-menu' ) }
+				<button className="wp-block-chiilog-block-overlay-menu__menu-button">
+					<span></span>
+					<span></span>
+					<span></span>
 				</button>
 			</div>
 		</>

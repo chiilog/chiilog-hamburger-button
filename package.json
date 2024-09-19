@@ -18,7 +18,8 @@
 	},
 	"devDependencies": {
 		"@types/wordpress__block-editor": "^11.5.15",
-		"@wordpress/scripts": "^27.9.0"
+		"@wordpress/scripts": "^27.9.0",
+		"tailwindcss": "^3.4.12"
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "^14.1.0",

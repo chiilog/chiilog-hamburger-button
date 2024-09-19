@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wp-block-chiilog-block-overlay-menu__menu-container {
+	@apply absolute left-0 right-0 bg-white z-10;
+}
+
+.wp-block-chiilog-block-overlay-menu__menu-button {
+	@apply relative block m-auto bg-transparent border-0 p-0 w-6 h-6 outline-1 outline-gray-400 overflow-hidden;
+	transition: transform 0.3s;
+
+	& span {
+		@apply block w-full h-0.5 bg-black absolute left-0 right-0;
+
+		&:nth-child(1) {
+			top: 0;
+			transition: transform 0.3s;
+			transform-origin: left;
+		}
+
+		&:nth-child(2) {
+			top: 50%;
+			transform: translateY(-50%);
+			transition: opacity 0.3s, left 0.3s;
+		}
+
+		&:nth-child(3) {
+			bottom: 0;
+			transition: transform 0.3s;
+			transform-origin: left;
+		}
+	}
+
+	&[aria-expanded="true"] span {
+		&:nth-child(1) {
+			transform: rotate(45deg);
+			left: 3px;
+			top: 3px;
+		}
+
+		&:nth-child(2) {
+			opacity: 0;
+			left: 100%;
+		}
+
+		&:nth-child(3) {
+			transform: rotate(-45deg);
+			left: 3px;
+			bottom: 2px;
+		}
+	}
+}
