@@ -1,4 +1,4 @@
-=== Overlay Menu ===
+=== Chiilog Overlay Menu ===
 Contributors:      Chiaki Okamoto
 Tags:              block
 Tested up to:      6.1
